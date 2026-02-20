@@ -4,6 +4,6 @@
     "typescript": "^5.9.3"
   },
   "scripts": {
-    "dev": "npx tsc && node dist/index.js"
+    "dev": "npx tsc && node dist/basic.js"
   }
 }
