@@ -75,7 +75,7 @@ function createUser() {
 }
 type UserType = ReturnType<typeof createUser>;
 
-// enum
+// const enum
 
 const enum HttpStatus {
   OK = 200,
