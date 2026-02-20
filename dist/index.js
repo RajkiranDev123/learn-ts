@@ -41,4 +41,70 @@ console.log("type inference");
 let inferredString = "raj";
 // inferredString=5 // Type 'number' is not assignable to type 'string'
 console.log("more on functions");
+//basic function with types
+function add(a, b) {
+    return a + b;
+}
+// optional parameters
+function greet(name, greeting) {
+    if (greeting) {
+        return `${greeting},${name}`;
+    }
+    return `hello ${name}`;
+}
+//default parameters
+function multiply(a, b = 1) {
+    return a * b;
+}
+//rest parameter
+function sum(...numbers) {
+    return numbers.reduce((acc, n) => acc + n, 0);
+}
+console.log("arrow functions");
+const divide = (a, b) => a / b;
+// with {}
+const divide2 = (a, b) => {
+    return a / b;
+};
+console.log("function types");
+function add2(a, b) {
+    return a + b;
+}
+let calculate;
+calculate = add2;
+/////////////////////////////////////////////////////
+console.log("object");
+let user = {
+    name: "raj",
+    age: 20,
+    id: 2,
+};
+let laptop = {
+    name: "raj",
+    price: 5,
+    getDiscount(percent) {
+        return this.price * (percent / 100);
+    },
+};
+///////////////// type alias //////////////
+console.log("type alias");
+let point = { x: 10, y: 20 };
+let userId = "raj";
+let productId = 65254;
+let mydog = {
+    name: "raj",
+    breed: "german ",
+};
+let girl = {
+    name: "raj",
+    age: 66,
+};
+const staffMember = {
+    name: "Alice",
+    employeeId: 1234,
+};
+function setstatus(status) {
+    console.log(`Status set to ${status}`);
+}
+setstatus("approved");
 //# sourceMappingURL=index.js.map
