@@ -1,0 +1,89 @@
+npm i typescript
+
+------------------------------------------------------------------------
+
+npx tsc --init : create a tsconfig.json
+
+
+-----------------------------------------------------------------------
+
+When installed locally, tsc is inside: node_modules/.bin/tsc
+So your terminal doesn’t recognize tsc directly.
+Your system does NOT add that to global PATH
+
+npx tsc --version
+
+npx temporarily runs binaries from:
+node_modules/.bin
+
+--------------------------------------------
+
+Breakdown:src/**/*
+
+** → go into all subfolders : any folder depth
+
+* → match any file
+
+-------------------------
+
+npx tsc :
+1 ==> 
+npx first looks in your local project for tsc inside:./node_modules/.bin/tsc
+If it finds it there, it runs that version of TypeScript.
+If it doesn’t exist locally, npx will temporarily download and run the package from npm.
+
+2 ==> 
+Once npx runs tsc:
+TypeScript looks for tsconfig.json in the current directory.
+It reads all compiler options (like rootDir, outDir, strict, etc.).
+
+----------------------------------
+
+A typical tsconfig.json has three main parts:
+
+{
+  "compilerOptions": { ... },
+  "include": [...],
+  "exclude": [...],
+  "files": [...]
+}
+
+------------------------------------------
+
+npx ts-node src/index.ts
+
+Important: ts-node never writes .js files to dist. Compilation happens in memory.
+
+Output goes directly to Node.
+
+-----------------------------------------------------------------------------------------
+
+./node_modules/.bin/ts-node : not found
+
+If ts-node is NOT installed locally:
+
+npx ts-node src/index.ts
+
+npx will temporarily download ts-node from npm.
+
+This happens in a temporary cache folder (not your project’s node_modules).
+
+After the command finishes, the temporary files may be removed automatically.
+
+✅ That’s why it works without installing globally, but you won’t see ts-node in your node_modules.
+
+---------------------------------------------------------------------------
+
+npm install -D ts-node : now came
+
+lots 0f files inside node_modules ?
+
+ans :
+
+ts-node itself has dependencies like esm, source-map-support, etc.
+
+These packages each have their own sub-dependencies, so the total number of files grows quickly.
+
+---------------------------------------------------------------
+
+
