@@ -4,6 +4,7 @@ npm i typescript
 
 npx tsc --init : create a tsconfig.json
 
+tsc : typescript compiler
 
 -----------------------------------------------------------------------
 
@@ -16,13 +17,32 @@ npx tsc --version
 npx temporarily runs binaries from:
 node_modules/.bin
 
+---------------------------------------------------
+
+npx : Node Package Execute
+
+npx prisma init
+Tool: Prisma
+👉 Sets up database configuration.
+
+npx : Used to run a package without installing it 
+✔ Temporarily downloads
+✔ Executes it
+✔ Does NOT add to node_modules
+
+npm : Used to install packages.
+
+Downloads Express.js
+Saves it in node_modules
+Adds it to package.json 
+
 --------------------------------------------
 
-Breakdown:src/**/*
+Breakdown : src/**/*
 
 ** → go into all subfolders : any folder depth
 
-* → match any file
+*  → match any file
 
 -------------------------
 
@@ -74,9 +94,7 @@ After the command finishes, the temporary files may be removed automatically.
 
 ---------------------------------------------------------------------------
 
-npm install -D ts-node : now came
-
-lots 0f files inside node_modules ?
+npm i -D ts-node : now came lots of files inside node_modules ?
 
 ans :
 

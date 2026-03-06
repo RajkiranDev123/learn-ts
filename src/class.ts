@@ -1,4 +1,4 @@
-console.log("instanceof type guard in class ============================>");
+console.log("instanceof : type guard in class ============================>");
 
 class Dog2 {
   bark() {
@@ -12,11 +12,11 @@ class Cat {
   }
 }
 
-function makeSound(animal: Dog2 | Cat) {
-  if (animal instanceof Dog2) {
-    animal.bark();
+function makeSound(obj: Dog2 | Cat) {
+  if (obj instanceof Dog2) {
+    obj.bark();
   } else {
-    animal.meow();
+    obj.meow();
   }
 }
 let obj = new Cat();
@@ -26,13 +26,13 @@ makeSound(obj); //meow
 
 console.log("class ====================================>");
 
-//access  modifier :
+// access  modifier :
 
-// Public members → accessible anywhere via instance.
+// Public members → accessible anywhere
 
-// Protected members → accessible inside class or subclass, not from outside.
+// Protected members → accessible inside class/parent class/base class or subclass
 
-// Private members → accessible only inside the class.
+// Private members → accessible only inside the class/parent class/base class.
 
 // Static members → accessible without an instance, directly via the class.
 

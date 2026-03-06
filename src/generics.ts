@@ -1,5 +1,6 @@
-//generics
 
+
+//generics
 //In TypeScript , a generic is a way to create resusable components like (functions, classes, or interfaces)
 
 //same function will work for numbers, arrays, or objects, without losing type safety:

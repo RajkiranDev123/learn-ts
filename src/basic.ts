@@ -10,14 +10,24 @@ let numbers: number[] = [1, 2];
 let names: string[] = ["raj", "ok"];
 
 console.log("tuples ============================================>");
-// Tuple = array with a fixed order + Store multiple values of specific types (heterogenous)
+
+// Tuple = A tuple is a fixed-length array where each element can have a different type.
 
 let person: [string, number] = ["raj", 1];
 
 console.log("enum ===============================================>");
 
 //let move = 0; // ❌ what does 0 mean?
+
+// ❌ TypeScript will NOT allow this:
+//Color.Yellow = 4;      // Error: Property 'Yellow' does not exist on type 'typeof Color'
+//Color.Red = 10;        // Error: Cannot assign to 'Red' because it is a read-only property
+
 //Enum = named values → Instead of 0, 1, 2, use Color.red  etc.
+
+//set of  named constants
+//is a way to give friendly names to numeric or string values.
+//9 is a name of red
 
 enum Color {
   red = 9, //we can also set custom values:
@@ -29,6 +39,10 @@ let favColor: Color = Color.green;
 console.log(favColor); //10
 
 // let favColor2: Color = Color.yellow //Property 'yellow' does not exist on type 'typeof Color'
+
+// Enum Reverse Mapping
+// TypeScript also lets you go from number → name
+console.log(Color[10]); // "green"
 
 console.log(
   "any ====================================================================>",
@@ -58,7 +72,7 @@ if (typeof value === "string") {
   console.log(value.toUpperCase()); // HELLO
 }
 
-//Type narrowing = making a broad type more specific so you can use it safely.
+//Type narrowing = making a broad type more (specific) so you can use it safely.
 
 console.log(
   "functions =======================================================>",
@@ -81,7 +95,7 @@ undefinedValue = undefined;
 
 console.log("type inference =======================================>");
 
-//ts automatically deduces the type of a variable
+//ts automatically (deduces) the type of a variable
 
 let inferredString = "raj";
 // inferredString=5 // Type 'number' is not assignable to type 'string'
@@ -119,6 +133,7 @@ function sum(...numbers: number[]): number {
 console.log("arrow functions ============================================>");
 
 const divide = (a: number, b: number): number => a / b;
+divide(7, 9);
 
 // with {} you need return keyword
 const divide2 = (a: number, b: number): number => {
@@ -133,17 +148,21 @@ function add2(a: number, b: number): number {
 let calculate: (x: number, y: number) => number;
 
 calculate = add2;
+calculate(5, 6);
 
 /////////////////////////////////////////////////////
-console.log("object ======================================================>");
+console.log(
+  "interface ======================================================>",
+);
 
+//an interface is a way to define the shape of an object
 //give types to object in ts
 
 interface User {
   name: string;
   age: number;
   email?: string; //optional
-  readonly id?: number;
+  readonly id?: number; // readonly
 }
 
 let user: User = {
@@ -157,6 +176,37 @@ user.age = 88;
 // user.id=9 //Cannot assign to 'id' because it is a read-only property.
 
 //interface with methods
+
+//Modern Way (ES6 – Method Shorthand)
+const person2 = {
+  name: "John",
+  age: 30,
+  greet() {
+    console.log("Hello!");
+  },
+};
+
+//Old Way (Before ES6)
+var person99 = {
+  name: "John",
+  age: 30,
+  greet: function () {
+    console.log("Hello!");
+  },
+};
+
+//Arrow Function Inside Object
+const person56 = {
+  name: "John",
+  greet: () => {
+    console.log("Hello ");
+  },
+};
+
+//arrow function in variable
+const greet5 = () => {
+  console.log("Hello");
+};
 
 interface Product {
   name: string;
@@ -176,6 +226,10 @@ let laptop: Product = {
   getS1: (tax: number): number => {
     return 7 * (tax / 20);
   },
+  //greet is now a property that holds a function, not a method. error below
+  //   getS1 (tax: number): number => {
+  //   return 7 * (tax / 20);
+  // },
 };
 
 ///////////////// type alias //////////////
@@ -194,6 +248,8 @@ let point: Point = {
 };
 
 console.log("type alias for primitives =============================>");
+
+//A union type allows a variable to hold more than one type.
 
 type id = string | number; // union
 let userId: id = "raj";
@@ -298,6 +354,10 @@ interface Circle {
 
 type ColorfulCircle = Colorful & Circle;
 
+// You could also do the same thing using interface extension:
+// interface ColorfulCircle extends Colorful, Circle {}
+// This is interface inheritance, not technically called “intersection,”
+
 let myCircle: ColorfulCircle = {
   color: "red",
   radius: 5,
@@ -312,14 +372,14 @@ console.log("string literal types ======================================>");
 let directions: "north" | "south";
 
 // console.log(directions) //Variable 'directions' is used before being assigned.
-
 // directions = "north";
 // directions="o" // Type '"o"' is not assignable to type '"north" | "south"'.
 
 console.log("numerical literal types ======================================>");
 
-let diceRoll: 1 | 2;
+//literal union type
 
+let diceRoll: 1 | 2;
 diceRoll = 2;
 
 //combining with other types
@@ -335,6 +395,10 @@ type ErrorResponse = {
 };
 
 type ApiResponse = SuccessResponse | ErrorResponse;
+let res: ApiResponse = {
+  status: "error",
+  message: "string",
+};
 
 //////////////////
 
@@ -343,6 +407,7 @@ console.log("type assertion ======================================>");
 // a type assertion is a way to tell the compiler or runtime that you know the specific type of a variable
 
 let someValue: unknown = "ok";
+
 let strLength: number = (someValue as string).length;
 //or
 let strLength2: number = (<string>someValue).length;
@@ -350,7 +415,6 @@ let strLength2: number = (<string>someValue).length;
 console.log("type guards =================================================>");
 
 // type guard : A check or function that tells TypeScript the type.
-
 // type narrowing : TypeScript figuring out a more specific type from a broad type (unknown).
 
 function processValue(value: string | number) {
@@ -360,3 +424,17 @@ function processValue(value: string | number) {
     console.log(value.toFixed(2));
   }
 }
+
+//Type guard = the test, Type narrowing = the result. ✅
+function example(x: string | number) {
+  if (typeof x === "string") {
+    // ✅ This is a type guard
+    console.log(x.toUpperCase()); // x is now narrowed to string
+  } else {
+    console.log(x + 10); // x is narrowed to number
+  }
+}
+
+// typeof x === "string" → type guard
+
+// Inside the if → x is narrowed to string
